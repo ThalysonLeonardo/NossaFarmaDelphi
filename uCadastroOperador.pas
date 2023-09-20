@@ -25,7 +25,9 @@ type
   private
     { Private declarations }
     function CriptografarSenha(const senha: string): string;
-    function VerificarLogin(login: string): Boolean;
+    function VerificarLoginExistente(login: string): Boolean;
+    function ValidarCamposObrigatorios: Boolean;
+    function ValidarSenha: Boolean;
   public
     { Public declarations }
   end;
@@ -39,24 +41,23 @@ implementation
 
 uses uHome, uDM;
 
+const
+  Semente = 'R6#GIRO2022@';
+
 function TfCadastroOperador.CriptografarSenha(const senha: string): string;
 var
-  Semente, Md5: string;
   Hasher : TIdHashMessageDigest5;
 begin
-  Semente := 'R6#GIRO2022@';
   Hasher := TIdHashMessageDigest5.Create;
 
   try
-    Md5 := Hasher.HashStringAsHex(senha);
+    Result := Semente + Hasher.HashStringAsHex(senha) + Semente;
   finally
     Hasher.Free;
   end;
-
-  Result := Semente + Md5 + Semente;
 end;
 
-function TfCadastroOperador.VerificarLogin(login: string): Boolean;
+function TfCadastroOperador.VerificarLoginExistente(login: string): Boolean;
 begin
   try
     dm.UniQuery1.Close;
@@ -75,6 +76,16 @@ begin
   end;
 end;
 
+function TfCadastroOperador.ValidarCamposObrigatorios: Boolean;
+begin
+   Result := (eNome.Text <> '') and (eSobrenome.Text <> '') and (eLogin.Text <> '') and (ePassword.Text <> '');
+end;
+
+function TfCadastroOperador.ValidarSenha: Boolean;
+begin
+  Result := (Length(ePassword.Text) >= 8) and (pos(' ', eLogin.Text) = 0) and (Pos(' ', ePassword.Text) = 0);
+end;
+
 procedure TfCadastroOperador.btnCancelarClick(Sender: TObject);
 begin
   if Assigned(fHome) then
@@ -89,34 +100,28 @@ procedure TfCadastroOperador.btnSalvarClick(Sender: TObject);
 var
   CriptoPassword: string;
 begin
-  if (eNome.Text = '') or (eSobrenome.Text = '') or (eLogin.Text = '') or (ePassword.Text = '') then
-  begin
-    ShowMessage('Preencha os campos!!');
-    Exit;
-  end;
-
-  if Length(ePassword.Text) < 8 then
-  begin
-    ShowMessage('A senha deve possuir mais de 8 caracteres!');
-    Exit;
-  end;
-
-  if (Pos(' ', eLogin.Text) > 0) or (Pos(' ', ePassword.Text) > 0) then
-  begin
-    ShowMessage('N„o pode haver espaÁos em branco no login ou senha.');
-    Exit;
-  end;
-
-  if VerificarLogin(eLogin.Text) then
-  begin
-    ShowMessage('J· existe um cadastro com esse login.');
-    Exit;
-  end;
-
-
-  CriptoPassword := CriptografarSenha(ePassword.Text);
-
   try
+    if not ValidarCamposObrigatorios then
+    begin
+      ShowMessage('Todos os campos s√£o obrigat√≥rios!');
+      Exit;
+    end;
+
+    if not ValidarSenha then
+    begin
+      ShowMessage('A senha deve possuir pelo menos 8 caracteres e n√£o pode conter espa√ßos em branco.');
+      Exit;
+    end;
+
+    if VerificarLoginExistente(eLogin.Text) then
+    begin
+      ShowMessage('J√° existe um cadastro com esse login.');
+      Exit;
+    end;
+
+    CriptoPassword := CriptografarSenha(ePassword.Text);
+
+
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;
     dm.UniQuery1.SQL.Add('INSERT INTO operadores (nome, sobrenome, login, senha_hash) VALUES (:nome, :sobrenome, :login, :senha)');

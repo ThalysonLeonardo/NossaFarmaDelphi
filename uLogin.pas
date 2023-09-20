@@ -92,7 +92,7 @@ begin
   Inc(Tentativas);
   if Tentativas >= 3 then
   begin
-    ShowMessage('Você Atingiu o máximo de tentativas. Tente novamente dentro de alguns minutos.');
+    ShowMessage('VocÃª Atingiu o mÃ¡ximo de tentativas. Tente novamente dentro de alguns minutos.');
     Application.Terminate;
   end;
 end;
