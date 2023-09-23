@@ -1,0 +1,16 @@
+﻿[Panel2]
+Coordinates=184,10,55,58
+
+[Panel1]
+Coordinates=119,10,55,58
+Visible=True
+
+[DM.UniDataSource1]
+Coordinates=0,0,132,36
+
+[DM.UniQuery1]
+Coordinates=10,10,99,58
+
+[]
+Coordinates=10,78,64,36
+

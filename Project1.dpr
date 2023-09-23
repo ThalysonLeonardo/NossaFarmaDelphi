@@ -6,7 +6,9 @@ uses
   uHome in 'uHome.pas' {fHome},
   uDM in 'uDM.pas' {DM: TDataModule},
   uConexaoDB in 'uConexaoDB.pas' {fConexaoDB},
-  uCadastroOperador in 'uCadastroOperador.pas' {fCadastroOperador};
+  uCadastroOperador in 'uCadastroOperador.pas' {fCadastroOperador},
+  uListarOperadores in 'uListarOperadores.pas' {fListarOperadores},
+  uEditarOperador in 'uEditarOperador.pas' {fEditarOperador};
 
 {$R *.res}
 
@@ -16,5 +18,7 @@ begin
   Application.CreateForm(TfLogin, fLogin);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TfCadastroOperador, fCadastroOperador);
+  Application.CreateForm(TfListarOperadores, fListarOperadores);
+  Application.CreateForm(TfEditarOperador, fEditarOperador);
   Application.Run;
 end.

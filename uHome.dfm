@@ -1016,6 +1016,7 @@ object fHome: TfHome
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFF7979791010102424241111116D6D6DFFFFFFFFFFFF0000}
         ParentFont = False
+        OnClick = btnListaOperadoresClick
         ExplicitLeft = 2
         ExplicitTop = 9
         ExplicitWidth = 179

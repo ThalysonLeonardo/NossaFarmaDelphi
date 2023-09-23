@@ -103,19 +103,19 @@ begin
   try
     if not ValidarCamposObrigatorios then
     begin
-      ShowMessage('Todos os campos s√£o obrigat√≥rios!');
+      ShowMessage('Todos os campos s„o obrigatÛrios!');
       Exit;
     end;
 
     if not ValidarSenha then
     begin
-      ShowMessage('A senha deve possuir pelo menos 8 caracteres e n√£o pode conter espa√ßos em branco.');
+      ShowMessage('A senha deve possuir pelo menos 8 caracteres e n„o pode conter espaÁos em branco.');
       Exit;
     end;
 
     if VerificarLoginExistente(eLogin.Text) then
     begin
-      ShowMessage('J√° existe um cadastro com esse login.');
+      ShowMessage('J· existe um cadastro com esse login.');
       Exit;
     end;
 

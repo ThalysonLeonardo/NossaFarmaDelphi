@@ -122,6 +122,14 @@
             <Form>fCadastroOperador</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uListarOperadores.pas">
+            <Form>fListarOperadores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uEditarOperador.pas">
+            <Form>fEditarOperador</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

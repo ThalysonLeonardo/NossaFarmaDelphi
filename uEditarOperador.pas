@@ -63,7 +63,7 @@ begin
       end
       else
       begin
-        ShowMessage('Operador n√£o encontrado');
+        ShowMessage('Operador n„o encontrado');
         Close;
       end;
 
@@ -78,7 +78,7 @@ begin
   end
   else
   begin
-    ShowMessage('ID de operador inv√°lido.');
+    ShowMessage('ID de operador inv·lido.');
     Close;
   end;
 end;
