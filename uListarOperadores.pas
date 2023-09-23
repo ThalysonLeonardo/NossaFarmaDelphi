@@ -21,7 +21,7 @@ type
     procedure btnEditarOperadorClick(Sender: TObject);
   private
     { Private declarations }
-    var OperadorID: Integer;
+    OperadorCod: Integer;
     procedure PreencherGrid;
   public
     { Public declarations }
@@ -48,12 +48,12 @@ procedure TfListarOperadores.btnEditarOperadorClick(Sender: TObject);
 begin
   if not dm.UniQuery1.IsEmpty then
   begin
-    OperadorID := dm.UniQuery1.FieldByName('codigo').AsInteger;
+    OperadorCod := dm.UniQuery1.FieldByName('codigo').AsInteger;
 
     if not Assigned(fEditarOperador) then
       Application.CreateForm(TfEditarOperador, fEditarOperador);
 
-    fEditarOperador.EditarOperador(OperadorID);
+    fEditarOperador.EditarOperador(OperadorCod);
 
     fEditarOperador.ShowModal;
 
@@ -71,13 +71,13 @@ begin
     begin
       if MessageDlg('Deseja realmente excluir este operador?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       begin
-        OperadorID := dm.UniQuery1.FieldByName('codigo').AsInteger;
+        OperadorCod := dm.UniQuery1.FieldByName('codigo').AsInteger;
 
         try
           dm.UniQuery1.Close;
           dm.UniQuery1.SQL.Clear;
           dm.UniQuery1.SQL.Add('DELETE FROM operadores WHERE codigo = :codigo');
-          dm.UniQuery1.ParamByName('codigo').AsInteger := OperadorID;
+          dm.UniQuery1.ParamByName('codigo').AsInteger := OperadorCod;
           dm.UniQuery1.ExecSQL;
 
           PreencherGrid;

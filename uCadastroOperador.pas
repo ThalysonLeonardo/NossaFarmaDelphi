@@ -24,12 +24,12 @@ type
     procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
-    function CriptografarSenha(const senha: string): string;
     function VerificarLoginExistente(login: string): Boolean;
     function ValidarCamposObrigatorios: Boolean;
     function ValidarSenha: Boolean;
   public
     { Public declarations }
+    function CriptografarSenha(const senha: string): string;
   end;
 
 var

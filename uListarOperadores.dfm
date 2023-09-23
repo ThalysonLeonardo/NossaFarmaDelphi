@@ -11,6 +11,7 @@ object fListarOperadores: TfListarOperadores
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -40,6 +41,7 @@ object fListarOperadores: TfListarOperadores
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = btnEditarOperadorClick
     end
     object btnExcluirOperador: TSpeedButton
       Left = 200
@@ -53,6 +55,7 @@ object fListarOperadores: TfListarOperadores
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = btnExcluirOperadorClick
     end
     object btnVoltar: TSpeedButton
       Left = 664
@@ -66,6 +69,7 @@ object fListarOperadores: TfListarOperadores
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = btnVoltarClick
     end
     object gridOperadores: TDBGrid
       Left = 0
