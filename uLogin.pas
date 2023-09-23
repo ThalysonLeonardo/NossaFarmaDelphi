@@ -37,7 +37,7 @@ implementation
 
 {$R *.dfm}
 
-uses uConexaoDB, uDM, uHome, uOperadores;
+uses uConexaoDB, uDM, uHome;
 
 function TfLogin.CriptografarSenha(const senha: string): string;
 var

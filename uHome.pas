@@ -30,6 +30,7 @@ type
     procedure pnlFundoMouseEnter(Sender: TObject);
     procedure btnOperadoresClick(Sender: TObject);
     procedure btnCadastrarOperadoresClick(Sender: TObject);
+    procedure btnListaOperadoresClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,7 +44,7 @@ implementation
 
 {$R *.dfm}
 
-uses uLogin, uCadastroOperador;
+uses uLogin, uCadastroOperador, uListarOperadores;
 
 procedure TfHome.btnCadastrarOperadoresClick(Sender: TObject);
 begin
@@ -58,6 +59,14 @@ procedure TfHome.btnEstoqueClick(Sender: TObject);
 begin
   pnlSubMenuEstoque.Visible := not pnlSubMenuEstoque.Visible;
   pnlSubMenuOperadores.Visible := False;
+end;
+
+procedure TfHome.btnListaOperadoresClick(Sender: TObject);
+begin
+  if not Assigned(fListarOperadores) then
+    Application.CreateForm(TfListarOperadores, fListarOperadores);
+
+  fListarOperadores.ShowModal;
 end;
 
 procedure TfHome.btnOperadoresClick(Sender: TObject);
