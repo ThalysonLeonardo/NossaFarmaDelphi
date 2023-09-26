@@ -8,7 +8,13 @@ uses
   uConexaoDB in 'uConexaoDB.pas' {fConexaoDB},
   uCadastroOperador in 'uCadastroOperador.pas' {fCadastroOperador},
   uListarOperadores in 'uListarOperadores.pas' {fListarOperadores},
-  uEditarOperador in 'uEditarOperador.pas' {fEditarOperador};
+  uEditarOperador in 'uEditarOperador.pas' {fEditarOperador},
+  uCadastroProdutos in 'uCadastroProdutos.pas' {fCadastroProdutos},
+  uListarProdutos in 'uListarProdutos.pas' {fListarProdutos},
+  uEditarProduto in 'uEditarProduto.pas' {fEditarProduto},
+  uListarLocais in 'uListarLocais.pas' {fLocaisEstoque},
+  uCadastrarLocal in 'uCadastrarLocal.pas' {fCadastrarLocal},
+  uEditarLocal in 'uEditarLocal.pas' {fEditarLocal};
 
 {$R *.res}
 
@@ -20,5 +26,11 @@ begin
   Application.CreateForm(TfCadastroOperador, fCadastroOperador);
   Application.CreateForm(TfListarOperadores, fListarOperadores);
   Application.CreateForm(TfEditarOperador, fEditarOperador);
+  Application.CreateForm(TfCadastroProdutos, fCadastroProdutos);
+  Application.CreateForm(TfListarProdutos, fListarProdutos);
+  Application.CreateForm(TfEditarProduto, fEditarProduto);
+  Application.CreateForm(TfLocaisEstoque, fLocaisEstoque);
+  Application.CreateForm(TfCadastrarLocal, fCadastrarLocal);
+  Application.CreateForm(TfEditarLocal, fEditarLocal);
   Application.Run;
 end.

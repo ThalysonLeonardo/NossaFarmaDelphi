@@ -25,12 +25,16 @@ type
     pnlSubMenuOperadores: TPanel;
     btnListaOperadores: TSpeedButton;
     btnCadastrarOperadores: TSpeedButton;
+    btnProdutos: TSpeedButton;
+    btnListarLocais: TSpeedButton;
     procedure btnSairClick(Sender: TObject);
     procedure btnEstoqueClick(Sender: TObject);
     procedure pnlFundoMouseEnter(Sender: TObject);
     procedure btnOperadoresClick(Sender: TObject);
     procedure btnCadastrarOperadoresClick(Sender: TObject);
     procedure btnListaOperadoresClick(Sender: TObject);
+    procedure btnProdutosClick(Sender: TObject);
+    procedure btnListarLocaisClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +48,8 @@ implementation
 
 {$R *.dfm}
 
-uses uLogin, uCadastroOperador, uListarOperadores;
+uses uLogin, uCadastroOperador, uListarOperadores, uCadastroProdutos,
+  uListarProdutos, uListarLocais;
 
 procedure TfHome.btnCadastrarOperadoresClick(Sender: TObject);
 begin
@@ -69,10 +74,26 @@ begin
   fListarOperadores.ShowModal;
 end;
 
+procedure TfHome.btnListarLocaisClick(Sender: TObject);
+begin
+  if not Assigned(fLocaisEstoque) then
+    Application.CreateForm(TfLocaisEstoque, fLocaisEstoque);
+
+  fLocaisEstoque.ShowModal;
+end;
+
 procedure TfHome.btnOperadoresClick(Sender: TObject);
 begin
   pnlSubMenuOperadores.Visible := not pnlSubMenuOperadores.Visible;
   pnlSubMenuEstoque.Visible := False;
+end;
+
+procedure TfHome.btnProdutosClick(Sender: TObject);
+begin
+  if not Assigned(fListarProdutos) then
+    Application.CreateForm(TfListarProdutos, fListarProdutos);
+
+  fListarProdutos.ShowModal;
 end;
 
 procedure TfHome.btnSairClick(Sender: TObject);

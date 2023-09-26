@@ -130,6 +130,30 @@
             <Form>fEditarOperador</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uCadastroProdutos.pas">
+            <Form>fCadastroProdutos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uListarProdutos.pas">
+            <Form>fListarProdutos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uEditarProduto.pas">
+            <Form>fEditarProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uListarLocais.pas">
+            <Form>fLocaisEstoque</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastrarLocal.pas">
+            <Form>fCadastrarLocal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uEditarLocal.pas">
+            <Form>fEditarLocal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
