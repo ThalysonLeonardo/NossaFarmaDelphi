@@ -14,7 +14,9 @@ uses
   uEditarProduto in 'uEditarProduto.pas' {fEditarProduto},
   uListarLocais in 'uListarLocais.pas' {fLocaisEstoque},
   uCadastrarLocal in 'uCadastrarLocal.pas' {fCadastrarLocal},
-  uEditarLocal in 'uEditarLocal.pas' {fEditarLocal};
+  uEditarLocal in 'uEditarLocal.pas' {fEditarLocal},
+  uEntradaMercadorias in 'uEntradaMercadorias.pas' {fEntradaMercadorias},
+  uSaidaMercadorias in 'uSaidaMercadorias.pas' {fSaidaMercadorias};
 
 {$R *.res}
 
@@ -32,5 +34,7 @@ begin
   Application.CreateForm(TfLocaisEstoque, fLocaisEstoque);
   Application.CreateForm(TfCadastrarLocal, fCadastrarLocal);
   Application.CreateForm(TfEditarLocal, fEditarLocal);
+  Application.CreateForm(TfEntradaMercadorias, fEntradaMercadorias);
+  Application.CreateForm(TfSaidaMercadorias, fSaidaMercadorias);
   Application.Run;
 end.

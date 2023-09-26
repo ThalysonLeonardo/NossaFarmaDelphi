@@ -35,6 +35,8 @@ type
     procedure btnListaOperadoresClick(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
     procedure btnListarLocaisClick(Sender: TObject);
+    procedure btnEntradaMercadoriasClick(Sender: TObject);
+    procedure btnSaidaMercadoriasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +51,7 @@ implementation
 {$R *.dfm}
 
 uses uLogin, uCadastroOperador, uListarOperadores, uCadastroProdutos,
-  uListarProdutos, uListarLocais;
+  uListarProdutos, uListarLocais, uEntradaMercadorias, uSaidaMercadorias;
 
 procedure TfHome.btnCadastrarOperadoresClick(Sender: TObject);
 begin
@@ -58,6 +60,14 @@ begin
 
   fCadastroOperador.ShowModal;
 
+end;
+
+procedure TfHome.btnEntradaMercadoriasClick(Sender: TObject);
+begin
+   if not Assigned(fEntradaMercadorias) then
+    Application.CreateForm(TfEntradaMercadorias, fEntradaMercadorias);
+
+   fEntradaMercadorias.ShowModal;
 end;
 
 procedure TfHome.btnEstoqueClick(Sender: TObject);
@@ -94,6 +104,14 @@ begin
     Application.CreateForm(TfListarProdutos, fListarProdutos);
 
   fListarProdutos.ShowModal;
+end;
+
+procedure TfHome.btnSaidaMercadoriasClick(Sender: TObject);
+begin
+  if not Assigned(fSaidaMercadorias) then
+    Application.CreateForm(TfSaidaMercadorias, fSaidaMercadorias);
+
+  fSaidaMercadorias.ShowModal;
 end;
 
 procedure TfHome.btnSairClick(Sender: TObject);

@@ -15,9 +15,9 @@
   TextHeight = 13
   object pnlFundo: TPanel
     Left = 0
-    Top = 0
+    Top = 41
     Width = 519
-    Height = 537
+    Height = 496
     Align = alClient
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
@@ -28,44 +28,38 @@
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitTop = 33
     object Label1: TLabel
       Left = 80
-      Top = 72
+      Top = 32
       Width = 43
       Height = 21
       Caption = 'Nome'
     end
-    object Label2: TLabel
-      Left = 80
-      Top = 144
-      Width = 67
-      Height = 21
-      Caption = 'Descri'#231#227'o'
-    end
     object Label3: TLabel
       Left = 80
-      Top = 280
+      Top = 240
       Width = 122
       Height = 21
       Caption = 'Estoque Negativo'
     end
     object Label4: TLabel
       Left = 296
-      Top = 280
+      Top = 240
       Width = 53
       Height = 21
       Caption = 'Entrada'
     end
     object Label5: TLabel
       Left = 80
-      Top = 360
+      Top = 320
       Width = 38
       Height = 21
       Caption = 'Saida'
     end
     object btnSalvar: TSpeedButton
       Left = 104
-      Top = 456
+      Top = 416
       Width = 129
       Height = 37
       Caption = 'SALVAR'
@@ -79,7 +73,7 @@
     end
     object btnCancelar: TSpeedButton
       Left = 280
-      Top = 456
+      Top = 416
       Width = 129
       Height = 37
       Caption = 'CANCELAR'
@@ -93,43 +87,45 @@
     end
     object Label6: TLabel
       Left = 296
-      Top = 360
+      Top = 320
       Width = 39
       Height = 21
       Caption = 'Pre'#231'o'
     end
-    object pnlTopo: TPanel
-      Left = 1
-      Top = 1
-      Width = 517
-      Height = 41
-      Align = alTop
-      Caption = 'CADASTRO DE PRODUTO'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clMenuHighlight
-      Font.Height = -16
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
+    object Label2: TLabel
+      Left = 80
+      Top = 104
+      Width = 67
+      Height = 21
+      Caption = 'Descri'#231#227'o'
     end
     object eNome: TEdit
       Left = 80
-      Top = 99
+      Top = 59
       Width = 361
       Height = 29
-      TabOrder = 1
+      TabOrder = 0
     end
     object eDescrição: TMemo
       Left = 80
-      Top = 171
+      Top = 131
       Width = 361
       Height = 89
-      TabOrder = 2
+      TabOrder = 1
     end
     object cbEstoqueNegativo: TComboBox
       Left = 80
-      Top = 307
+      Top = 267
+      Width = 145
+      Height = 29
+      TabOrder = 2
+      Items.Strings = (
+        'Sim'
+        'N'#227'o')
+    end
+    object cbEntrada: TComboBox
+      Left = 296
+      Top = 267
       Width = 145
       Height = 29
       TabOrder = 3
@@ -137,9 +133,9 @@
         'Sim'
         'N'#227'o')
     end
-    object cbEntrada: TComboBox
-      Left = 296
-      Top = 307
+    object cbSaida: TComboBox
+      Left = 80
+      Top = 347
       Width = 145
       Height = 29
       TabOrder = 4
@@ -147,22 +143,30 @@
         'Sim'
         'N'#227'o')
     end
-    object cbSaida: TComboBox
-      Left = 80
-      Top = 387
+    object ePreco: TEdit
+      Left = 296
+      Top = 347
       Width = 145
       Height = 29
       TabOrder = 5
-      Items.Strings = (
-        'Sim'
-        'N'#227'o')
     end
-    object ePreco: TEdit
-      Left = 296
-      Top = 387
-      Width = 145
-      Height = 29
-      TabOrder = 6
-    end
+  end
+  object pnlTopo: TPanel
+    Left = 0
+    Top = 0
+    Width = 519
+    Height = 41
+    Align = alTop
+    Caption = 'CADASTRO DE PRODUTO'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clMenuHighlight
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    ExplicitLeft = 1
+    ExplicitTop = 1
+    ExplicitWidth = 517
   end
 end

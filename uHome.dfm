@@ -835,6 +835,7 @@ object fHome: TfHome
           FFFFFFFFFFFFFFFFFFFFFFE8E8E8181818181818E8E8E8FFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000}
         ParentFont = False
+        OnClick = btnEntradaMercadoriasClick
         ExplicitLeft = 0
         ExplicitTop = 105
         ExplicitWidth = 160
@@ -921,6 +922,7 @@ object fHome: TfHome
           FFFFFFFFFFFFFFFFFFFFFFE8E8E8181818181818E8E8E8FFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000}
         ParentFont = False
+        OnClick = btnSaidaMercadoriasClick
         ExplicitLeft = 0
         ExplicitTop = 105
         ExplicitWidth = 160
