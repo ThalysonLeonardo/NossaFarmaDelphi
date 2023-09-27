@@ -29,9 +29,6 @@ object fSaidaMercadorias: TfSaidaMercadorias
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = 47
-    ExplicitWidth = 748
-    ExplicitHeight = 418
     object Label1: TLabel
       Left = 48
       Top = 32
@@ -96,32 +93,18 @@ object fSaidaMercadorias: TfSaidaMercadorias
       TabOrder = 1
     end
     object pnlLote: TPanel
-      Left = 96
-      Top = 116
-      Width = 561
+      Left = 280
+      Top = 124
+      Width = 209
       Height = 125
       ParentBackground = False
       TabOrder = 2
       object Label5: TLabel
-        Left = 24
+        Left = 32
         Top = 40
         Width = 132
         Height = 21
         Caption = 'N'#218'MERO DO LOTE'
-      end
-      object Label6: TLabel
-        Left = 193
-        Top = 40
-        Width = 156
-        Height = 21
-        Caption = 'DATA DE FABRICA'#199#195'O'
-      end
-      object Label7: TLabel
-        Left = 385
-        Top = 40
-        Width = 149
-        Height = 21
-        Caption = 'DATA DE VECIMENTO'
       end
       object Label4: TLabel
         Left = 16
@@ -137,9 +120,9 @@ object fSaidaMercadorias: TfSaidaMercadorias
         ParentFont = False
       end
       object eLote: TEdit
-        Left = 24
+        Left = 40
         Top = 67
-        Width = 132
+        Width = 121
         Height = 29
         TabOrder = 0
       end
@@ -150,24 +133,6 @@ object fSaidaMercadorias: TfSaidaMercadorias
       Width = 137
       Height = 29
       TabOrder = 3
-    end
-    object dtFabricacao: TDateTimePicker
-      Left = 289
-      Top = 183
-      Width = 156
-      Height = 29
-      Date = 45195.386376493060000000
-      Time = 45195.386376493060000000
-      TabOrder = 4
-    end
-    object dtVencimento: TDateTimePicker
-      Left = 481
-      Top = 183
-      Width = 149
-      Height = 29
-      Date = 45195.386376493060000000
-      Time = 45195.386376493060000000
-      TabOrder = 5
     end
   end
   object Panel2: TPanel
@@ -184,8 +149,5 @@ object fSaidaMercadorias: TfSaidaMercadorias
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
-    ExplicitLeft = 1
-    ExplicitTop = 1
-    ExplicitWidth = 786
   end
 end

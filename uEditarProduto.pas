@@ -29,6 +29,7 @@ type
   private
     { Private declarations }
     FProdutoID: Integer;
+    QuantidadeProdutos: Integer;
     procedure PreencherDadosProduto;
     procedure AtualizarProduto;
   public
@@ -53,7 +54,7 @@ begin
 
       dm.UniQuery1.Close;
       dm.UniQuery1.SQL.Clear;
-      dm.UniQuery1.SQL.Add('SELECT nome, descricao, preco, status_entrada, status_saida, estoque_negativo FROM produtos WHERE id = :id');
+      dm.UniQuery1.SQL.Add('SELECT nome, descricao, preco, status_entrada, status_saida, estoque_negativo, quantidade FROM produtos WHERE id = :id');
       dm.UniQuery1.ParamByName('id').AsInteger := FProdutoID;
       dm.UniQuery1.Open;
 

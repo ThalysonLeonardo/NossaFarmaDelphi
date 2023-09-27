@@ -32,6 +32,9 @@ type
     procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
+    function PermiteEntradaProduto(const ProdutoNome: string): Boolean;
+    function LocalEstoqueAtivo(const LocalEstoqueNome: string): Boolean;
+    function VerificarLote(const LoteNum: string): Boolean;
   public
     { Public declarations }
   end;
@@ -45,6 +48,77 @@ implementation
 
 uses uConexaoDB, uDM;
 
+function TfEntradaMercadorias.PermiteEntradaProduto(const ProdutoNome: string): Boolean;
+begin
+  try
+    dm.UniQuery1.Close;
+    dm.UniQuery1.SQL.Clear;
+    dm.UniQuery1.SQL.Add('SELECT status_entrada FROM produtos WHERE nome = :nome');
+    dm.UniQuery1.ParamByName('nome').AsString := ProdutoNome;
+    dm.UniQuery1.Open;
+
+    if not dm.UniQuery1.IsEmpty then
+    begin
+      Result := dm.UniQuery1.FieldByName('status_entrada').AsBoolean;
+    end
+    else
+    begin
+      Result := False;
+    end;
+  except
+    Result := False;
+  end;
+end;
+
+function TfEntradaMercadorias.LocalEstoqueAtivo(const LocalEstoqueNome: string): Boolean;
+begin
+  try
+    dm.UniQuery1.Close;
+    dm.UniQuery1.SQL.Clear;
+    dm.UniQuery1.SQL.Add('SELECT status FROM locais_estoque WHERE nome = :nome');
+    dm.UniQuery1.ParamByName('nome').AsString := LocalEstoqueNome;
+    dm.UniQuery1.Open;
+
+    if not dm.UniQuery1.IsEmpty then
+    begin
+      Result := dm.UniQuery1.FieldByName('status').AsBoolean;
+    end
+    else
+    begin
+      Result := False;
+    end;
+  except
+    Result := False;
+  end;
+end;
+
+function TfEntradaMercadorias.VerificarLote(const LoteNum: string): Boolean;
+begin
+  try
+    dm.UniQuery1.Close;
+    dm.UniQuery1.SQL.Clear;
+    dm.UniQuery1.SQL.Add('SELECT numero_lote, data_fabricacao, data_vencimento FROM movimentacoes_estoque WHERE numero_lote = :numero_lote');
+    dm.UniQuery1.ParamByName('numero_lote').AsString := LoteNum;
+    dm.UniQuery1.Open;
+
+    if not dm.UniQuery1.IsEmpty then
+    begin
+      ShowMessage('Lote já cadastrado:' +
+        #13#10'Número do Lote: ' + dm.UniQuery1.FieldByName('numero_lote').AsString +
+        #13#10'Data de Fabricação: ' + dm.UniQuery1.FieldByName('data_fabricacao').AsString +
+        #13#10'Data de Vencimento: ' + dm.UniQuery1.FieldByName('data_vencimento').AsString);
+      Result := True;
+    end
+    else
+    begin
+      Result := False;
+    end;
+  except
+    ShowMessage('Erro ao verificar o lote.');
+    Result := True;
+  end;
+end;
+
 procedure TfEntradaMercadorias.btnCancelarClick(Sender: TObject);
 begin
   Close;
@@ -53,7 +127,29 @@ end;
 procedure TfEntradaMercadorias.btnSalvarClick(Sender: TObject);
 var
   IDProduto, IDLocalEstoque, Quantidade: Integer;
+  ProdutoNome, LocalEstoqueNome, LoteNum: string;
 begin
+  ProdutoNome:= cbProduto.Text;
+  LocalEstoqueNome := cbLocalEstoque.Text;
+  LoteNum := eLote.Text;
+
+  if not PermiteEntradaProduto(ProdutoNome) then
+  begin
+    ShowMessage('Este produto ' + ProdutoNome + ' não permite entrada');
+    Exit;
+  end;
+
+  if not LocalEstoqueAtivo(LocalEstoqueNome) then
+  begin
+      ShowMessage('Este local ' + LocalEstoqueNome + ' está inativo');
+      Exit;
+  end;
+
+  if VerificarLote(LoteNum) then
+  begin
+    Exit;
+  end;
+
   try
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;

@@ -64,13 +64,14 @@ begin
 
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;
-    dm.UniQuery1.SQL.Add('INSERT INTO produtos (nome, descricao, estoque_negativo, status_entrada, status_saida, preco) VALUES (:nome, :descricao, :estoque_negativo, :status_entrada, :status_saida, :preco)');
+    dm.UniQuery1.SQL.Add('INSERT INTO produtos (nome, descricao, estoque_negativo, status_entrada, status_saida, preco, quantidade) VALUES (:nome, :descricao, :estoque_negativo, :status_entrada, :status_saida, :preco, :quantidade)');
     dm.UniQuery1.ParamByName('nome').AsString := eNome.Text;
     dm.UniQuery1.ParamByName('descricao').AsString := eDescrição.Text;
     dm.UniQuery1.ParamByName('estoque_negativo').AsBoolean := cbEstoqueNegativo.ItemIndex = 0;
     dm.UniQuery1.ParamByName('status_entrada').AsBoolean := cbEntrada.ItemIndex = 0;
     dm.UniQuery1.ParamByName('status_saida').AsBoolean := cbSaida.ItemIndex = 0;
     dm.UniQuery1.ParamByName('preco').AsFloat := StrToFloat(ePreco.Text);
+    dm.UniQuery1.ParamByName('quantidade').AsInteger := 0;
 
     dm.UniQuery1.ExecSQL;
 

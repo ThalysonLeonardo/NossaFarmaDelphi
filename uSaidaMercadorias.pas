@@ -19,19 +19,18 @@ type
     cbLocalEstoque: TComboBox;
     pnlLote: TPanel;
     Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
     Label4: TLabel;
-    eLote: TEdit;
     eQuantidade: TEdit;
-    dtFabricacao: TDateTimePicker;
-    dtVencimento: TDateTimePicker;
     Panel2: TPanel;
+    eLote: TEdit;
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
+    function PermiteSaidaProduto(const ProdutoNome: string): Boolean;
+    function LocalEstoqueAtivo(const LocalEstoqueNome: string): Boolean;
+    function VerificarLote(const LoteNum: string): Boolean;
   public
     { Public declarations }
   end;
@@ -45,6 +44,50 @@ implementation
 
 uses uConexaoDB, uDM;
 
+function TfSaidaMercadorias.PermiteSaidaProduto(const ProdutoNome: string): Boolean;
+begin
+  try
+    dm.UniQuery1.Close;
+    dm.UniQuery1.SQL.Clear;
+    dm.UniQuery1.SQL.Add('SELECT status_saida FROM produtos WHERE nome = :nome');
+    dm.UniQuery1.ParamByName('nome').AsString := ProdutoNome;
+    dm.UniQuery1.Open;
+
+    if not dm.UniQuery1.IsEmpty then
+    begin
+      Result := dm.UniQuery1.FieldByName('status_saida').AsBoolean;
+    end
+    else
+    begin
+      Result := False;
+    end;
+  except
+    Result := False;
+  end;
+end;
+
+function TfSaidaMercadorias.LocalEstoqueAtivo(const LocalEstoqueNome: string): Boolean;
+begin
+  try
+    dm.UniQuery1.Close;
+    dm.UniQuery1.SQL.Clear;
+    dm.UniQuery1.SQL.Add('SELECT status FROM locais_estoque WHERE nome = :nome');
+    dm.UniQuery1.ParamByName('nome').AsString := LocalEstoqueNome;
+    dm.UniQuery1.Open;
+
+    if not dm.UniQuery1.IsEmpty then
+    begin
+      Result := dm.UniQuery1.FieldByName('status').AsBoolean;
+    end
+    else
+    begin
+      Result := False;
+    end;
+  except
+    Result := False;
+  end;
+end;
+
 procedure TfSaidaMercadorias.btnCancelarClick(Sender: TObject);
 begin
   Close;
@@ -53,7 +96,23 @@ end;
 procedure TfSaidaMercadorias.btnSalvarClick(Sender: TObject);
 var
   IDProduto, IDLocalEstoque, Quantidade: Integer;
+  ProdutoNome, LocalEstoqueNome: string;
 begin
+  ProdutoNome:= cbProduto.Text;
+  LocalEstoqueNome := cbLocalEstoque.Text;
+
+  if not PermiteSaidaProduto(ProdutoNome) then
+  begin
+    ShowMessage('Este produto ' + ProdutoNome + ' não permite saida');
+    Exit;
+  end;
+
+  if not LocalEstoqueAtivo(LocalEstoqueNome) then
+  begin
+      ShowMessage('Este local ' + LocalEstoqueNome + ' está inativo');
+      Exit;
+  end;
+
   try
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;
@@ -99,8 +158,6 @@ begin
     dm.UniQuery1.ParamByName('quantidade').AsInteger := Quantidade;
     dm.UniQuery1.ParamByName('data_hora').AsDateTime := Now;
     dm.UniQuery1.ParamByName('numero_lote').AsString := eLote.Text;
-    dm.UniQuery1.ParamByName('data_fabricacao').AsDate := dtFabricacao.Date;
-    dm.UniQuery1.ParamByName('data_vencimento').AsDate := dtVencimento.Date;
     dm.UniQuery1.ExecSQL;
 
     ShowMessage('Entrada de mercadorias registrada com sucesso!');
@@ -155,5 +212,4 @@ begin
     end;
   end;
 end;
-
 end.

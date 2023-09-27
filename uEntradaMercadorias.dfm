@@ -29,8 +29,6 @@ object fEntradaMercadorias: TfEntradaMercadorias
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = 47
-    ExplicitHeight = 418
     object Label1: TLabel
       Left = 48
       Top = 32
@@ -183,6 +181,5 @@ object fEntradaMercadorias: TfEntradaMercadorias
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 817
   end
 end

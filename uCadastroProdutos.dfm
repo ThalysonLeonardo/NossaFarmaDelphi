@@ -28,7 +28,6 @@
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = 33
     object Label1: TLabel
       Left = 80
       Top = 32
@@ -165,8 +164,5 @@
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
-    ExplicitLeft = 1
-    ExplicitTop = 1
-    ExplicitWidth = 517
   end
 end

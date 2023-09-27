@@ -3,7 +3,7 @@ object fLogin: TfLogin
   Top = 0
   Caption = 'LoginForm'
   ClientHeight = 367
-  ClientWidth = 979
+  ClientWidth = 661
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object fLogin: TfLogin
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 760
-    Top = 32
+    Left = 392
+    Top = 112
     Width = 48
     Height = 19
     Caption = 'LOGIN'
@@ -28,8 +28,8 @@ object fLogin: TfLogin
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 760
-    Top = 96
+    Left = 392
+    Top = 176
     Width = 51
     Height = 19
     Caption = 'SENHA'
@@ -41,8 +41,8 @@ object fLogin: TfLogin
     ParentFont = False
   end
   object Image1: TImage
-    Left = 96
-    Top = 32
+    Left = 40
+    Top = 48
     Width = 257
     Height = 257
     Picture.Data = {
@@ -303,8 +303,8 @@ object fLogin: TfLogin
       17E299F21A430000000049454E44AE426082}
   end
   object Label3: TLabel
-    Left = 432
-    Top = 56
+    Left = 352
+    Top = 25
     Width = 259
     Height = 59
     Caption = 'NossaFarma'
@@ -318,8 +318,8 @@ object fLogin: TfLogin
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 408
-    Top = 105
+    Left = 328
+    Top = 74
     Width = 305
     Height = 23
     Caption = 'Gerenciamento de f'#225'rmacias e estoques'
@@ -331,8 +331,8 @@ object fLogin: TfLogin
     ParentFont = False
   end
   object TXT_login: TEdit
-    Left = 760
-    Top = 57
+    Left = 392
+    Top = 137
     Width = 185
     Height = 27
     CharCase = ecUpperCase
@@ -345,8 +345,8 @@ object fLogin: TfLogin
     TabOrder = 0
   end
   object TXT_password: TEdit
-    Left = 760
-    Top = 121
+    Left = 392
+    Top = 201
     Width = 185
     Height = 27
     Font.Charset = DEFAULT_CHARSET
@@ -359,8 +359,8 @@ object fLogin: TfLogin
     TabOrder = 1
   end
   object btn_logar: TButton
-    Left = 760
-    Top = 160
+    Left = 392
+    Top = 240
     Width = 81
     Height = 33
     Caption = 'ENTRAR'
@@ -374,8 +374,8 @@ object fLogin: TfLogin
     OnClick = btn_logarClick
   end
   object Button1: TButton
-    Left = 760
-    Top = 312
+    Left = 374
+    Top = 304
     Width = 211
     Height = 33
     Caption = 'CONFIGURAR CONEX'#195'O'
