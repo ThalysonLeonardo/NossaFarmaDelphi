@@ -17,7 +17,8 @@ uses
   uEditarLocal in 'uEditarLocal.pas' {fEditarLocal},
   uEntradaMercadorias in 'uEntradaMercadorias.pas' {fEntradaMercadorias},
   uSaidaMercadorias in 'uSaidaMercadorias.pas' {fSaidaMercadorias},
-  uRetirada in 'uRetirada.pas' {fRetirada};
+  uRetirada in 'uRetirada.pas' {fRetirada},
+  uConsultarEstoque in 'uConsultarEstoque.pas' {fConsultarEstoque};
 
 {$R *.res}
 
@@ -38,5 +39,6 @@ begin
   Application.CreateForm(TfEntradaMercadorias, fEntradaMercadorias);
   Application.CreateForm(TfSaidaMercadorias, fSaidaMercadorias);
   Application.CreateForm(TfRetirada, fRetirada);
+  Application.CreateForm(TfConsultarEstoque, fConsultarEstoque);
   Application.Run;
 end.

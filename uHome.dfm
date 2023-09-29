@@ -1009,6 +1009,7 @@ object fHome: TfHome
           FFFFFFFFFFFFFFFFFFFFFFE8E8E8181818181818E8E8E8FFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000}
         ParentFont = False
+        OnClick = btnConsultaEstoqueClick
         ExplicitTop = 104
         ExplicitWidth = 183
       end

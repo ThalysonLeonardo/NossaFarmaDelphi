@@ -17,8 +17,8 @@ type
     cbProduto: TComboBox;
     cbLocalEstoque: TComboBox;
     Panel2: TPanel;
-    btnConsultar: TSpeedButton;
     gridLotes: TDBGrid;
+    btnConsultar: TSpeedButton;
     procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
