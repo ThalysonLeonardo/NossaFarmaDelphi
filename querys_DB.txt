@@ -1,0 +1,95 @@
+CREATE DATABASE "NossaFarmaDB"
+  WITH OWNER = postgres
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'English_United States.1252'
+       LC_CTYPE = 'English_United States.1252'
+       CONNECTION LIMIT = -1;
+
+CREATE TABLE categorias
+(
+  id serial NOT NULL,
+  nome character varying(255) NOT NULL,
+  CONSTRAINT categorias_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE categorias
+  OWNER TO postgres;
+
+
+
+CREATE TABLE locais_estoque
+(
+  id serial NOT NULL,
+  nome character varying(255) NOT NULL,
+  descricao text,
+  status boolean,
+  CONSTRAINT locais_estoque_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE locais_estoque
+  OWNER TO postgres;
+
+
+CREATE TABLE movimentacoes_estoque
+(
+  id serial NOT NULL,
+  id_produto integer NOT NULL,
+  id_local_estoque integer NOT NULL,
+  quantidade integer NOT NULL,
+  data_hora timestamp without time zone NOT NULL,
+  numero_lote character varying(255),
+  data_fabricacao date,
+  data_vencimento date,
+  CONSTRAINT movimentacoes_estoque_pkey PRIMARY KEY (id),
+  CONSTRAINT movimentacoes_estoque_id_local_estoque_fkey FOREIGN KEY (id_local_estoque)
+      REFERENCES locais_estoque (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT movimentacoes_estoque_id_produto_fkey FOREIGN KEY (id_produto)
+      REFERENCES produtos (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE movimentacoes_estoque
+  OWNER TO postgres;
+
+
+CREATE TABLE operadores
+(
+  codigo serial NOT NULL,
+  nome character varying(255) NOT NULL,
+  sobrenome character varying(255) NOT NULL,
+  login character varying(50) NOT NULL,
+  senha_hash character varying(128) NOT NULL,
+  CONSTRAINT operadores_pkey PRIMARY KEY (codigo),
+  CONSTRAINT operadores_login_key UNIQUE (login)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE operadores
+  OWNER TO postgres;
+
+
+CREATE TABLE produtos
+(
+  id serial NOT NULL,
+  nome character varying(255) NOT NULL,
+  descricao text,
+  preco numeric(10,2) NOT NULL,
+  estoque_negativo boolean,
+  status_entrada boolean,
+  status_saida boolean,
+  CONSTRAINT produtos_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE produtos
+  OWNER TO postgres;

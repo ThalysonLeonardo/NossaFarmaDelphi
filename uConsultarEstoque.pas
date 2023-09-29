@@ -105,6 +105,8 @@ end;
 
 procedure TfConsultarEstoque.FormShow(Sender: TObject);
 begin
+   stEstoque.ColCount := 6;
+
   cbProduto.Items.Clear;
   try
     dm.UniQuery1.Close;
