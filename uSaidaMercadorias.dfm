@@ -2,7 +2,7 @@ object fSaidaMercadorias: TfSaidaMercadorias
   Left = 0
   Top = 0
   Caption = 'Saida de Mercadorias'
-  ClientHeight = 395
+  ClientHeight = 531
   ClientWidth = 738
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object fSaidaMercadorias: TfSaidaMercadorias
     Left = 0
     Top = 41
     Width = 738
-    Height = 354
+    Height = 490
     Align = alClient
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
@@ -30,7 +30,7 @@ object fSaidaMercadorias: TfSaidaMercadorias
     ParentFont = False
     TabOrder = 0
     object Label1: TLabel
-      Left = 48
+      Left = 56
       Top = 32
       Width = 171
       Height = 21
@@ -43,43 +43,50 @@ object fSaidaMercadorias: TfSaidaMercadorias
       Height = 21
       Caption = 'LOCAL DE ESTOQUE'
     end
-    object Label3: TLabel
-      Left = 560
-      Top = 32
-      Width = 97
-      Height = 21
-      Caption = 'QUANTIDADE'
-    end
-    object btnSalvar: TSpeedButton
+    object btnRetirada: TSpeedButton
       Left = 176
-      Top = 276
-      Width = 129
+      Top = 428
+      Width = 161
       Height = 37
-      Caption = 'SALVAR'
+      Caption = 'FAZER RETIRADA'
       Font.Charset = ANSI_CHARSET
       Font.Color = clMenuHighlight
       Font.Height = -16
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnSalvarClick
+      OnClick = btnRetiradaClick
     end
-    object btnCancelar: TSpeedButton
-      Left = 417
-      Top = 276
+    object btnVoltar: TSpeedButton
+      Left = 409
+      Top = 428
       Width = 129
       Height = 37
-      Caption = 'CANCELAR'
+      Caption = 'VOLTAR'
       Font.Charset = ANSI_CHARSET
       Font.Color = clMenuHighlight
       Font.Height = -16
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnCancelarClick
+      OnClick = btnVoltarClick
+    end
+    object btnConsultar: TSpeedButton
+      Left = 548
+      Top = 51
+      Width = 129
+      Height = 37
+      Caption = 'CONSULTAR'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clMenuHighlight
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnConsultarClick
     end
     object cbProduto: TComboBox
-      Left = 48
+      Left = 56
       Top = 59
       Width = 171
       Height = 29
@@ -92,47 +99,18 @@ object fSaidaMercadorias: TfSaidaMercadorias
       Height = 29
       TabOrder = 1
     end
-    object pnlLote: TPanel
-      Left = 280
-      Top = 124
-      Width = 209
-      Height = 125
-      ParentBackground = False
+    object gridLotes: TDBGrid
+      Left = 56
+      Top = 112
+      Width = 621
+      Height = 281
+      DataSource = DM.UniDataSource1
       TabOrder = 2
-      object Label5: TLabel
-        Left = 32
-        Top = 40
-        Width = 132
-        Height = 21
-        Caption = 'N'#218'MERO DO LOTE'
-      end
-      object Label4: TLabel
-        Left = 16
-        Top = 8
-        Width = 29
-        Height = 17
-        Caption = 'LOTE'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clMenuHighlight
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object eLote: TEdit
-        Left = 40
-        Top = 67
-        Width = 121
-        Height = 29
-        TabOrder = 0
-      end
-    end
-    object eQuantidade: TEdit
-      Left = 560
-      Top = 59
-      Width = 137
-      Height = 29
-      TabOrder = 3
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clMenuHighlight
+      TitleFont.Height = -16
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
     end
   end
   object Panel2: TPanel

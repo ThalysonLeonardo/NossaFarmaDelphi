@@ -5,32 +5,30 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfSaidaMercadorias = class(TForm)
     pnlFundo: TPanel;
     Label1: TLabel;
     Label2: TLabel;
-    Label3: TLabel;
-    btnSalvar: TSpeedButton;
-    btnCancelar: TSpeedButton;
+    btnRetirada: TSpeedButton;
+    btnVoltar: TSpeedButton;
     cbProduto: TComboBox;
     cbLocalEstoque: TComboBox;
-    pnlLote: TPanel;
-    Label5: TLabel;
-    Label4: TLabel;
-    eQuantidade: TEdit;
     Panel2: TPanel;
-    eLote: TEdit;
-    procedure btnCancelarClick(Sender: TObject);
+    btnConsultar: TSpeedButton;
+    gridLotes: TDBGrid;
+    procedure btnVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btnSalvarClick(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
+    procedure btnRetiradaClick(Sender: TObject);
   private
     { Private declarations }
+    IDProduto, IDLocalEstoque, NumLote: Integer;
     function PermiteSaidaProduto(const ProdutoNome: string): Boolean;
     function LocalEstoqueAtivo(const LocalEstoqueNome: string): Boolean;
-    function VerificarLote(const LoteNum: string): Boolean;
+    procedure PreencherGrid(IDProduto, IDLocalEstoque: Integer);
   public
     { Public declarations }
   end;
@@ -42,7 +40,7 @@ implementation
 
 {$R *.dfm}
 
-uses uConexaoDB, uDM;
+uses uConexaoDB, uDM, uRetirada;
 
 function TfSaidaMercadorias.PermiteSaidaProduto(const ProdutoNome: string): Boolean;
 begin
@@ -88,31 +86,18 @@ begin
   end;
 end;
 
-procedure TfSaidaMercadorias.btnCancelarClick(Sender: TObject);
+procedure TfSaidaMercadorias.PreencherGrid(IDProduto, IDLocalEstoque: Integer);
 begin
-  Close;
+  dm.UniQuery1.Close;
+  dm.UniQuery1.SQL.Clear;
+  dm.UniQuery1.SQL.Add('SELECT numero_lote, data_fabricacao, data_vencimento, quantidade FROM movimentacoes_estoque WHERE id_produto = :id_produto AND id_local_estoque = :id_local_estoque ORDER BY data_vencimento');
+  dm.UniQuery1.ParamByName('id_produto').AsInteger := IDProduto;
+  dm.UniQuery1.ParamByName('id_local_estoque').AsInteger := IDLocalEstoque;
+  dm.UniQuery1.Open;
 end;
 
-procedure TfSaidaMercadorias.btnSalvarClick(Sender: TObject);
-var
-  IDProduto, IDLocalEstoque, Quantidade: Integer;
-  ProdutoNome, LocalEstoqueNome: string;
+procedure TfSaidaMercadorias.btnConsultarClick(Sender: TObject);
 begin
-  ProdutoNome:= cbProduto.Text;
-  LocalEstoqueNome := cbLocalEstoque.Text;
-
-  if not PermiteSaidaProduto(ProdutoNome) then
-  begin
-    ShowMessage('Este produto ' + ProdutoNome + ' não permite saida');
-    Exit;
-  end;
-
-  if not LocalEstoqueAtivo(LocalEstoqueNome) then
-  begin
-      ShowMessage('Este local ' + LocalEstoqueNome + ' está inativo');
-      Exit;
-  end;
-
   try
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;
@@ -142,30 +127,11 @@ begin
       Exit;
     end;
 
-
-    if not TryStrToInt(eQuantidade.Text, Quantidade) then
-    begin
-      ShowMessage('Quantidade inválida.');
-      Exit;
-    end;
-
-    dm.UniQuery1.Close;
-    dm.UniQuery1.SQL.Clear;
-    dm.UniQuery1.SQL.Add('INSERT INTO movimentacoes_estoque (id_produto, id_local_estoque, tipo_movimentacao, quantidade, data_hora, numero_lote, data_fabricacao, data_vencimento) ' + 'VALUES (:id_produto, :id_local_estoque, :tipo_movimentacao, :quantidade, :data_hora, :numero_lote, :data_fabricacao, :data_vencimento)');
-    dm.UniQuery1.ParamByName('id_produto').AsInteger := IDProduto;
-    dm.UniQuery1.ParamByName('id_local_estoque').AsInteger := IDLocalEstoque;
-    dm.UniQuery1.ParamByName('tipo_movimentacao').AsString := 'S';
-    dm.UniQuery1.ParamByName('quantidade').AsInteger := Quantidade;
-    dm.UniQuery1.ParamByName('data_hora').AsDateTime := Now;
-    dm.UniQuery1.ParamByName('numero_lote').AsString := eLote.Text;
-    dm.UniQuery1.ExecSQL;
-
-    ShowMessage('Entrada de mercadorias registrada com sucesso!');
-    Close;
+    PreencherGrid(IDProduto, IDLocalEstoque);
   except
     on E: Exception do
     begin
-      ShowMessage('Erro ao registrar entrada de mercadorias: ' + E.Message);
+      ShowMessage('Erro ao carregar dados: ' + E.Message);
     end;
   end;
 end;
@@ -173,7 +139,6 @@ end;
 procedure TfSaidaMercadorias.FormShow(Sender: TObject);
 begin
   cbProduto.Items.Clear;
-
   try
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;
@@ -193,7 +158,6 @@ begin
   end;
 
   cbLocalEstoque.Items.Clear;
-
   try
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;
@@ -212,4 +176,42 @@ begin
     end;
   end;
 end;
+
+procedure TfSaidaMercadorias.btnRetiradaClick(Sender: TObject);
+var
+  ProdutoNome, LocalEstoqueNome: String;
+begin
+  ProdutoNome:= cbProduto.Text;
+  LocalEstoqueNome := cbLocalEstoque.Text;
+
+  if not PermiteSaidaProduto(ProdutoNome) then
+  begin
+    ShowMessage('Este produto ' + ProdutoNome + ' não permite saida');
+    Exit;
+  end;
+
+  if not LocalEstoqueAtivo(LocalEstoqueNome) then
+  begin
+      ShowMessage('Este local ' + LocalEstoqueNome + ' está inativo');
+      Exit;
+  end;
+
+  if not dm.UniQuery1.IsEmpty then
+  begin
+    NumLote := dm.UniQuery1.FieldByName('numero_lote').AsInteger;
+
+    if not Assigned(fRetirada) then
+      Application.CreateForm(TfRetirada, fRetirada);
+
+    fRetirada.RetiradaCalculo(NumLote);
+
+    fRetirada.ShowModal;
+  end
+end;
+
+procedure TfSaidaMercadorias.btnVoltarClick(Sender: TObject);
+begin
+  Close;
+end;
+
 end.

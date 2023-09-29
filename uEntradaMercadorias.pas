@@ -188,10 +188,9 @@ begin
 
     dm.UniQuery1.Close;
     dm.UniQuery1.SQL.Clear;
-    dm.UniQuery1.SQL.Add('INSERT INTO movimentacoes_estoque (id_produto, id_local_estoque, tipo_movimentacao, quantidade, data_hora, numero_lote, data_fabricacao, data_vencimento) ' + 'VALUES (:id_produto, :id_local_estoque, :tipo_movimentacao, :quantidade, :data_hora, :numero_lote, :data_fabricacao, :data_vencimento)');
+    dm.UniQuery1.SQL.Add('INSERT INTO movimentacoes_estoque (id_produto, id_local_estoque, quantidade, data_hora, numero_lote, data_fabricacao, data_vencimento) ' + 'VALUES (:id_produto, :id_local_estoque, :quantidade, :data_hora, :numero_lote, :data_fabricacao, :data_vencimento)');
     dm.UniQuery1.ParamByName('id_produto').AsInteger := IDProduto;
     dm.UniQuery1.ParamByName('id_local_estoque').AsInteger := IDLocalEstoque;
-    dm.UniQuery1.ParamByName('tipo_movimentacao').AsString := 'E';
     dm.UniQuery1.ParamByName('quantidade').AsInteger := Quantidade;
     dm.UniQuery1.ParamByName('data_hora').AsDateTime := Now;
     dm.UniQuery1.ParamByName('numero_lote').AsString := eLote.Text;

@@ -16,7 +16,8 @@ uses
   uCadastrarLocal in 'uCadastrarLocal.pas' {fCadastrarLocal},
   uEditarLocal in 'uEditarLocal.pas' {fEditarLocal},
   uEntradaMercadorias in 'uEntradaMercadorias.pas' {fEntradaMercadorias},
-  uSaidaMercadorias in 'uSaidaMercadorias.pas' {fSaidaMercadorias};
+  uSaidaMercadorias in 'uSaidaMercadorias.pas' {fSaidaMercadorias},
+  uRetirada in 'uRetirada.pas' {fRetirada};
 
 {$R *.res}
 
@@ -36,5 +37,6 @@ begin
   Application.CreateForm(TfEditarLocal, fEditarLocal);
   Application.CreateForm(TfEntradaMercadorias, fEntradaMercadorias);
   Application.CreateForm(TfSaidaMercadorias, fSaidaMercadorias);
+  Application.CreateForm(TfRetirada, fRetirada);
   Application.Run;
 end.
